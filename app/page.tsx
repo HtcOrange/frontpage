@@ -1,47 +1,50 @@
+import { ChevronRight, Bell, Search } from 'lucide-react'
+import { AppSidebar } from '@/components/platform/app-sidebar'
+import { CreateJob } from '@/components/platform/create-job'
+
 export default function Page() {
   return (
-    <main
-      style={{
-        colorScheme: 'light dark',
-        position: 'relative',
-        display: 'flex',
-        minHeight: '100vh',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'light-dark(#fff, #000)',
-        color: 'light-dark(#000, #fff)',
-      }}
-    >
-      <svg
-        aria-hidden="true"
-        style={{ width: 80, height: 80 }}
-        width={80}
-        height={80}
-        fill="none"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-        stroke="currentColor"
-        strokeWidth="0.5"
-      >
-        <path
-          d="M14.2 14.2H17V6.9375C17 4.76288 15.2371 3 13.0625 3H5.8V5.8M14.2 14.2V7.79063L7.79062 14.2H14.2ZM14.2 14.2V17H6.9375C4.76288 17 3 15.2371 3 13.0625V5.8H5.8M5.8 5.8V12.2313L12.2313 5.8H5.8Z"
-          strokeLinejoin="round"
-        />
-      </svg>
-      <p
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: 'calc(50% + 56px)',
-          transform: 'translateX(-50%)',
-          whiteSpace: 'nowrap',
-          fontSize: '14px',
-          fontWeight: 500,
-          color: 'light-dark(#71717a, #a1a1aa)',
-        }}
-      >
-        Your v0 generation will show here.
-      </p>
-    </main>
+    <div className="flex min-h-screen bg-background">
+      <AppSidebar />
+
+      <div className="flex min-w-0 flex-1 flex-col">
+        {/* 顶栏 */}
+        <header className="sticky top-0 z-10 flex h-16 items-center justify-between gap-4 border-b border-border bg-background/80 px-4 backdrop-blur sm:px-6">
+          <nav className="flex items-center gap-1.5 text-sm text-muted-foreground">
+            <span>训练任务</span>
+            <ChevronRight className="size-4" />
+            <span className="font-medium text-foreground">新建任务</span>
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <div className="hidden items-center gap-2 rounded-lg border border-border bg-card px-3 py-1.5 text-sm text-muted-foreground md:flex">
+              <Search className="size-4" />
+              <span>搜索任务、模型……</span>
+            </div>
+            <button
+              type="button"
+              aria-label="通知"
+              className="flex size-9 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <Bell className="size-4" />
+            </button>
+          </div>
+        </header>
+
+        {/* 主内容 */}
+        <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-6 sm:px-6 sm:py-8">
+          <div className="mb-6">
+            <h1 className="text-2xl font-semibold tracking-tight text-foreground text-balance">
+              创建训练任务
+            </h1>
+            <p className="mt-1 text-sm text-muted-foreground text-pretty">
+              定义模型、数据与算力配置，平台将为你调度并运行这次训练。
+            </p>
+          </div>
+
+          <CreateJob />
+        </main>
+      </div>
+    </div>
   )
 }
